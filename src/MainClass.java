@@ -1,12 +1,11 @@
 
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 public class MainClass {
 
     public static int X_SIZE = 5;
     public static int Y_SIZE = 5;
-    public static int DOTS_TO_WIN = 4;
+    public static int DOTS_TO_WIN = 5;
     public static char[][] map = new char[Y_SIZE][X_SIZE];
 
     public static char PLAYER1_DOT = 'X';
@@ -244,6 +243,8 @@ public class MainClass {
                 {0, 1, 0, -1},
                 {-1, 1, 1, -1},
                 {-1, 0, 1, 0},
+        };
+        int [][] t2 = {
                 {0, 0, 1,1},
                 {0, 0, 0, 1},
                 {0, 0, -1, 1},
@@ -254,12 +255,31 @@ public class MainClass {
                 {0, 0, 1, 0},
         };
 
+        List<int[]> intList = Arrays.asList(t);
+        Collections.shuffle(intList);
+        intList.toArray(t);
+
+        List<int[]> intList2 = Arrays.asList(t2);
+        Collections.shuffle(intList2);
+        intList2.toArray(t2);
+
         for (int i = 0; i < t.length; i++) {
             if (((last_y+t[i][1]>=0) && (last_x+t[i][0]>=0) && (last_y+t[i][1]<Y_SIZE) && (last_x+t[i][0]<X_SIZE)) && map[last_y+t[i][1]][last_x+t[i][0]]==PLAYER1_DOT) {
                 if (((last_y+t[i][3]>=0) && (last_x+t[i][2]>=0) && (last_y+t[i][3]<Y_SIZE) && (last_x+t[i][2]<X_SIZE)) && map[last_y+t[i][3]][last_x+t[i][2]]==EMPTY_DOT) {
                     next_y = last_y+t[i][3];
                     next_x = last_x+t[i][2];
                     break;
+                }
+            }
+        }
+        if (next_x==-1) {
+            for (int i = 0; i < t2.length; i++) {
+                if (((last_y+t2[i][1]>=0) && (last_x+t2[i][0]>=0) && (last_y+t2[i][1]<Y_SIZE) && (last_x+t2[i][0]<X_SIZE)) && map[last_y+t2[i][1]][last_x+t2[i][0]]==PLAYER1_DOT) {
+                    if (((last_y+t2[i][3]>=0) && (last_x+t2[i][2]>=0) && (last_y+t2[i][3]<Y_SIZE) && (last_x+t2[i][2]<X_SIZE)) && map[last_y+t2[i][3]][last_x+t2[i][2]]==EMPTY_DOT) {
+                        next_y = last_y+t2[i][3];
+                        next_x = last_x+t2[i][2];
+                        break;
+                    }
                 }
             }
         }
