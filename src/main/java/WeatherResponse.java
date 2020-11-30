@@ -7,6 +7,10 @@ public class WeatherResponse {
     public class DayWeather {
         public String IconPhrase;
 
+        public String getIconPhrase() {
+            return IconPhrase;
+        }
+
         @Override
         public String toString() {
             return IconPhrase;

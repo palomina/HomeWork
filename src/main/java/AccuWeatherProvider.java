@@ -7,6 +7,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 public class AccuWeatherProvider implements WeatherProvider {
@@ -62,6 +63,14 @@ public class AccuWeatherProvider implements WeatherProvider {
         List<WeatherResponse> weatherResponses =
                 objectMapper.readValue(objectMapper.readTree(json).at("/DailyForecasts").toString(), new TypeReference<List<WeatherResponse>>() {
                 });
+
+        if (weatherResponses.size() > 0) {
+            try {
+                Db.saveWeather(ApplicationGlobalState.getInstance().getSelectedCity(), weatherResponses);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
 
         System.out.println("---------------- ПРОГНОЗ ПОГОДЫ ---------------------");
         for (WeatherResponse item : weatherResponses) {

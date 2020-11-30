@@ -17,6 +17,7 @@ public class UserInterface {
             System.out.println("Выберите действие:");
             System.out.println("1 - Получить текущую погоду");
             System.out.println("2 - Получить погоду на следующие 5 дней");
+            System.out.println("3 - Получить погоду из БД");
             System.out.println("exit/выход - завершить программу");
             String action = scanner.nextLine();
 
@@ -45,6 +46,7 @@ public class UserInterface {
     private void checkIsExit(String action) {
         if (action.toLowerCase().equals("выход") || action.toLowerCase().equals("exit")) {
             System.out.println("До свидания!");
+            Db.closeConnection();
             System.exit(0);
         }
     }

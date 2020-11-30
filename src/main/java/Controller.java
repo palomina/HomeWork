@@ -14,6 +14,7 @@ public class Controller {
     public Controller() {
         variantResult.put(1, Functionality.GET_CURRENT_WEATHER);
         variantResult.put(2, Functionality.GET_WEATHER_IN_NEXT_5_DAYS);
+        variantResult.put(3, Functionality.GET_WEATHER_FROM_BD);
     }
 
     public void onUserInput(String input) throws IOException {
@@ -30,6 +31,10 @@ public class Controller {
             case GET_WEATHER_IN_NEXT_5_DAYS:
                 getWeatherIn5Days();
                 break;
+            case GET_WEATHER_FROM_BD:
+                Db.readWeather();
+                break;
+
         }
     }
 
